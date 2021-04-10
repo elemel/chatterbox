@@ -4,7 +4,7 @@ local Engine = require("game.Engine")
 local M = Class.new()
 
 function M:init()
-  self.engine = Engine.new()
+  self.engine = Engine.new({})
 end
 
 function M:draw()

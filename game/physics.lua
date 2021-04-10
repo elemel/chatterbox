@@ -9,20 +9,23 @@ function M.debugDrawFixtures(world)
       local shapeType = shape:getType()
 
       if shapeType == "chain" then
-        love.graphics.polygon("line", body:getWorldPoints(shape:getPoints()))
+        love.graphics.line(body:getWorldPoints(shape:getPoints()))
 
-        local previousX, previousY = body:getWorldPoint(
-          shape:getPreviousVertex())
+        if shape:getPreviousVertex() then
+          local previousX, previousY = body:getWorldPoint(
+            shape:getPreviousVertex())
 
-        local firstX, firstY = body:getWorldPoint(shape:getPoint(1))
+          local firstX, firstY = body:getWorldPoint(shape:getPoint(1))
+          love.graphics.line(previousX, previousY, firstX, firstY)
+        end
 
-        local lastX, lastY = body:getWorldPoint(
-          shape:getPoint(shape:getVertexCount()))
+        if shape:getNextVertex() then
+          local lastX, lastY = body:getWorldPoint(
+            shape:getPoint(shape:getVertexCount()))
 
-        local nextX, nextY = body:getWorldPoint(shape:getNextVertex())
-
-        love.graphics.line(previousX, previousY, firstX, firstY)
-        love.graphics.line(lastX, lastY, nextX, nextY)
+          local nextX, nextY = body:getWorldPoint(shape:getNextVertex())
+          love.graphics.line(lastX, lastY, nextX, nextY)
+        end
       elseif shapeType == "circle" then
         local x, y = body:getWorldPoint(shape:getPoint())
         local radius = shape:getRadius()

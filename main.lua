@@ -1,6 +1,7 @@
 local GameScreen = require("game.GameScreen")
 
 function love.load()
+  love.physics.setMeter(1)
   screen = GameScreen.new()
 end
 
